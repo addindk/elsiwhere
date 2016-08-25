@@ -48,7 +48,7 @@ document.getElementById('mappage').addEventListener('mdl-componentupgraded', fun
             }
 
             var feature = features[0];
-            window.location.href = "/sight/" + feature.properties.id;
+            window.location.href = "/c" + feature.properties.id+'.html';
 
             // Populate the popup and set its coordinates
             // based on the feature found.

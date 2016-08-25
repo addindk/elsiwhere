@@ -32,17 +32,7 @@
           <!-- Content -->
          
           <div id="items" class="mdl-list mdl-color--white">
-            {% for post in site.categories[page.image] %}
-            <a href="{{ post.url | prepend: site.baseurl }}" class="mdl-list__item mdl-list__item--three-line mdl-list--border">
-              <span class="mdl-list__item-primary-content">
-                <span>{{ post.title }}</span>
-                <span class="mdl-list__item-text-body">{{ post.content }}</span>
-              </span>
-              <span class="mdl-list__item-secondary-content" >
-                <span class="list-img" style="background: url('/assets/post/256/{{post.image}}.jpg') center / cover;"></span>
-              </span>
-            </a>
-            {% endfor %}
+            
 
           </div>
         </div>

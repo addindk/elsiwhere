@@ -33,7 +33,7 @@ firebase.database().ref('category').on("child_added", function (snapshot) {
     var key = snapshot.key;
     console.log(key, item);
     var html = '<div id="' + key + '" class="mdl-cell mdl-cell--2-col-phone mdl-cell--4-col-tablet mdl-cell--4-col-desktop category">';
-    html += '<a href="/category/' + key + '.html">';
+    html += '<a href="/a' + key + '.html">';
     html += '<img src="/assets/category/256/' + key + '.jpg" class="sq" />';
     html += '<span class="image-title">';
     html += '<span class="name">' + item.t + '</span>';

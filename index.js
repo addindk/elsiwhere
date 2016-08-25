@@ -158,11 +158,14 @@ var buildJekyll = function () {
 var categoryAdd = function (data) {
     var date = moment();
     return download(data).then(function () {
-        var p = './_category';
-        var name = data._id + '.md';
-        var content = '---\nlayout: category\ntitle: ' + data.title + '\nimage: ' + data._id + '\n---\n' + data.description;
+        var p = './_posts';
+        var name = date.format('YYYY-MM-DD') + '-a' + data._id + '.md';
+        var content = '---\nlayout: category\ntitle: ' + data.title + '\nimage: ' + data._id;
+        content += '\ncategory: category';
+        content += '\n---';
+        content += '\n' + data.description;
         return writeFile(p, name, content);
-    }).then(function(){
+    }).then(function () {
         return buildJekyll();
     }).then(function () {
         return firebase.database().ref('category').child(data._id).set({ t: data.title, d: data.description, ts: date.valueOf() });
@@ -171,15 +174,15 @@ var categoryAdd = function (data) {
 var subcategoryAdd = function (data) {
     var date = moment();
     return download(data).then(function () {
-        var p = './_subcategory';
-        var name = data._id + '.md';
+        var p = './_posts';
+        var name = date.format('YYYY-MM-DD') + '-b' + data._id + '.md';
         var content = '---\nlayout: ' + data.item + '\ntitle: ' + data.title + '\nimage: ' + data._id;
         content += '\ndate: ' + date.format('YYYY-MM-DD HH:mm:ss ZZ');
         content += '\ncategory: ' + data.category;
         content += '\n---';
         content += '\n' + data.description;
         return writeFile(p, name, content);
-    }).then(function(){
+    }).then(function () {
         return buildJekyll();
     }).then(function () {
         return firebase.database().ref(data.item).child(data.category).child(data._id).set({ t: data.title, d: data.description, ts: date.valueOf() });
@@ -191,8 +194,8 @@ var postAdd = function (data) {
         return firebase.database().ref('users').child(data.uid).once('value');
     }).then(function (snapshot) {
         var user = snapshot.val();
-        var p = './_sight';
-        var name = data._id + '.md';
+        var p = './_posts';
+        var name = date.format('YYYY-MM-DD') + '-c' + data._id + '.md';
         var content = '---\nlayout: ' + data.item + '\ntitle: ' + data.title + '\nimage: ' + data._id;
         content += '\nlatitude: ' + data.lat + '\nlongitude: ' + data.lng;
         content += '\ndate: ' + date.format('YYYY-MM-DD HH:mm:ss ZZ');
@@ -202,7 +205,7 @@ var postAdd = function (data) {
         content += '\n---';
         content += '\n' + data.description;
         return writeFile(p, name, content);
-    }).then(function(){
+    }).then(function () {
         return buildJekyll();
     }).then(function () {
         var doc = {
@@ -267,8 +270,11 @@ var categoryRemove = function (data) {
     }).then(function () {
         return removeImages(data);
     }).then(function () {
-        return removeFile('./_category/' + data._id + '.md');
-    }).then(function(){
+        return firebase.database().ref('category').child(data._id).once('value');
+    }).then(function (snapshot) {
+        var item = snapshot.val();
+        return removeFile('./_posts/' + moment(item.ts).format('YYYY-MM-DD') + '-a' + data._id + '.md');
+    }).then(function () {
         return buildJekyll();
     }).then(function () {
         return firebase.database().ref(data.item).child(data._id).remove();
@@ -292,9 +298,9 @@ var subcategoryRemove = function (data) {
     }).then(function () {
         return firebase.database().ref(data.item).child(data.category).child(data._id).once('value');
     }).then(function (snapshot) {
-        var post = snapshot.val();
-        return removeFile('./_subcategory/' + data._id + '.md');
-    }).then(function(){
+        var item = snapshot.val();
+        return removeFile('./_posts/' + moment(item.ts).format('YYYY-MM-DD') + '-b' + data._id + '.md');
+    }).then(function () {
         return buildJekyll();
     }).then(function () {
         return firebase.database().ref(data.item).child(data.category).child(data._id).remove();
@@ -302,8 +308,11 @@ var subcategoryRemove = function (data) {
 };
 var postRemove = function (data) {
     return removeImages(data).then(function () {
-        return removeFile('./_sight/' + data._id + '.md');
-    }).then(function(){
+        return firebase.database().ref(data.item).child(data._id).once('value');
+    }).then(function (snapshot) {
+        var item = snapshot.val();
+        return removeFile('./_posts/' + moment(item.ts).format('YYYY-MM-DD') + '-c' + data._id + '.md');
+    }).then(function () {
         return buildJekyll();
     }).then(function () {
         return firebase.database().ref(data.item).child(data._id).remove();

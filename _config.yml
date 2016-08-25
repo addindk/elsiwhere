@@ -17,11 +17,6 @@ github_username:  runetvilum
 
 # Build settings
 markdown: kramdown
-exclude: [ 'node_modules', '*.json' ]
-collections:
-  category:
-    output: true
-  subcategory:
-    output: true
-  sight:
-    output: true
+exclude: [ 'node_modules', '*.json', 'index.js' ]
+permalink: :title.html
+

@@ -38,7 +38,7 @@ if (!dialogRemove.showModal) {
 dialogRemove.querySelector('.accept').addEventListener('click', function () {
     var key = id;
     firebase.database().ref('queue/tasks/' + key).set({ action: 'remove', item: 'post', category: category }).then(function (res) {
-        window.location.href = "/subcategory/"+category;
+        window.location.href = "/b"+category;
     }).catch(function (err) {
         $('#error').text(err.message);
     });

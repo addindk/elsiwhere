@@ -30,7 +30,7 @@ firebase.database().ref('post').orderByChild("c").equalTo(id).on("child_added", 
     var item = snapshot.val();
     var key = snapshot.key;
     console.log(key, item);
-    var html = '<a href="/sight/'  + key + '.html" class="mdl-list__item mdl-list__item--three-line mdl-list--border">';
+    var html = '<a id="'+key+'" href="/c'  + key + '.html" class="mdl-list__item mdl-list__item--three-line mdl-list--border">';
     html += '<span class="mdl-list__item-primary-content">';
     html += '<span>' + item.t + '</span>';
     html += '<span class="mdl-list__item-text-body">' + item.d + '</span>';
@@ -136,7 +136,7 @@ dialogAdd.querySelector('.close').addEventListener('click', function () {
 dialogRemove.querySelector('.accept').addEventListener('click', function () {
     var key = id;
     firebase.database().ref('queue/tasks/' + key).set({ action: 'remove', item: 'subcategory', category: category }).then(function (res) {
-        window.location.href = "/";
+        window.location.href = "/a"+category;
     }).catch(function (err) {
         $('#error').text(err.message);
     });
