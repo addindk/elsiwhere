@@ -1,0 +1,33 @@
+---
+title: "Kort"
+---
+<!DOCTYPE html>
+<html>
+
+{% include head.html style='teal-orange'%}
+
+<body>
+
+  <div id="mappage" class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer mdl-layout--no-desktop-drawer-button">
+    
+<header class="mdl-layout__header">  
+  <div class="mdl-layout__header-row">
+    <span class="mdl-layout-title logo" href="/">{{site.title }}</span>
+    <div class="mdl-layout-spacer"></div>
+    <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+      <i class="material-icons">share</i>
+    </button>
+  </div>
+</header>
+
+    {% include drawer.html %}
+    <main class="mdl-layout__content">
+      <div id="map" class="mdl-layout__map"></div>
+    </main>
+  </div>
+  {% include dialog-login.html %}
+  <script defer src='https://api.mapbox.com/mapbox-gl-js/v0.22.1/mapbox-gl.js'></script>
+  <script defer src='/js/map.js'></script>
+</body>
+
+</html>

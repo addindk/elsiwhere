@@ -1,0 +1,45 @@
+<dialog id="dialog-add-post" class="mdl-dialog">
+    <h5 class="mdl-dialog__title">Opret oplevelse</h5>
+    <div class="mdl-dialog__content">
+        <form id="form-add-post">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="title" required>
+                <label class="mdl-textfield__label" for="title">Titel</label>
+                <span class="mdl-textfield__error">Påkrævet</span>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <textarea class="mdl-textfield__input" type="text" rows="5" id="description" required></textarea>
+                <label class="mdl-textfield__label" for="description">Beskrivelse</label>
+                <span class="mdl-textfield__error">Påkrævet</span>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--file mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="dateStart" readonly/>
+                <label class="mdl-textfield__label" for="dateStat">Start dato</label>
+                <button type="button" id="btn-dateStart" class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
+                <i class="material-icons">event</i>
+            </button>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--file mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="dateSlut" readonly/>
+                <label class="mdl-textfield__label" for="dateSlut">Slut dato</label>
+                <button type="button" id="btn-dateSlut" class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
+                <i class="material-icons">event</i>
+            </button>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--file">
+                <input class="mdl-textfield__input" placeholder="Billede" type="text" id="uploadFile" readonly/>
+                <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
+                    <i class="material-icons">attach_file</i><input type="file" name="uploadBtn" accept=".jpg,.jpeg,image/jpeg,image/jpg">
+                </div>
+            </div>
+
+            <div id="map" class="minimap"></div>
+            <p id="error"></p>
+        </form>
+    </div>
+    <div class="mdl-progress mdl-js-progress"></div>
+    <div class="mdl-dialog__actions">
+        <button type="button" class="mdl-button accept">Opret</button>
+        <button type="button" class="mdl-button close">Fortryd</button>
+    </div>
+</dialog>

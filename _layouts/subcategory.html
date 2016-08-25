@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+{% include head.html style='indigo-orange'%}
+
+<body>
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer mdl-layout--no-desktop-drawer-button">
+    <header class="mdl-layout__header mdl-layout__header--waterfall" style="height:200px;">
+      <div class="header-image"></div>
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title logo">{{site.title }}</span>
+          <div class="mdl-layout-spacer"></div>
+          <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="material-icons">share</i>
+          </button>
+          <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
+            <li class="mdl-menu__item">Del på facebook</li>
+            <li class="mdl-menu__item">Twitter</li>
+        </ul>
+      </div>
+      <div class="mdl-layout__header-row mdl-card--expand">
+        <span class="mdl-layout-title">{{page.title}}</span>
+      </div>
+      
+    </header>
+             
+     {% include drawer.html %}
+
+    <main class="mdl-layout__content">
+      <div class="mdl-grid mdl-grid--no-spacing">
+        <div class="mdl-cell mdl-cell--12-col  mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
+          <!-- Content -->
+         
+          <div id="items" class="mdl-list mdl-color--white">
+            {% for post in site.categories[page.image] %}
+            <a href="{{ post.url | prepend: site.baseurl }}" class="mdl-list__item mdl-list__item--three-line mdl-list--border">
+              <span class="mdl-list__item-primary-content">
+                <span>{{ post.title }}</span>
+                <span class="mdl-list__item-text-body">{{ post.content }}</span>
+              </span>
+              <span class="mdl-list__item-secondary-content" >
+                <span class="list-img" style="background: url('/assets/post/256/{{post.image}}.jpg') center / cover;"></span>
+              </span>
+            </a>
+            {% endfor %}
+
+          </div>
+        </div>
+      </div>
+       {% include footer.html %}
+      </main>
+    <div class="fab-bottom">
+      <button id="edit" class="admin mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--primary"><i class="material-icons">edit</i></button>
+      <button id="remove" class="admin mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--primary"><i class="material-icons">remove</i></button>
+      <button id="add" class="auth mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--primary"><i class="material-icons">add</i></button>
+    </div>
+  </div>
+  {% include dialog-remove-subcategory.html %}
+  {% include dialog-add-post.html %}
+  {% include dialog-login.html %}
+  <style>
+    .header-image {
+      background: url('/assets/subcategory/1024/{{page.image}}.jpg') center / cover;
+    }
+  </style>
+  <script>
+    var id = "{{page.image}}";
+    var category = "{{page.category}}";
+</script>
+  <script defer src="/js/subcategory.js"></script>
+  <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNMB2oRUTvJZyUbxCX-hZx6SrzhKAuWCo&callback=initMap"></script>
+</body>
+
+</html>

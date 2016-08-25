@@ -1,0 +1,40 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
+  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <meta property="og:url" content="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}" />
+  <meta property="og:title" content="{{page.title}}" />
+  <meta property="og:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}"
+  />
+  <meta property="og:image" content="{{site.url}}/assets/{{include.item}}/raw/{{page.image}}.jpg" />
+  <meta property="og:site_name" content="{{site.title}}" />
+  <meta property="fb:app_id" content="1559938820976000" />
+  <meta property="og:locale" content="da-DK" />
+  <meta property="og:type" content="place" />
+  <meta property="place:location:latitude" content="{{page.latitude}}">
+  <meta property="place:location:longitude" content="{{page.longitude}}">
+
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ " /feed.xml
+    " | prepend: site.baseurl | prepend: site.url }}">
+  <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/v0.22.1/mapbox-gl.css'/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Pacifico:400'/>
+  <link rel="stylesheet" href="https://code.getmdl.io/1.2.0/material.{{include.style}}.min.css"/>
+  <link rel="stylesheet" type="text/css" href="/bower_components/dialog-polyfill/dialog-polyfill.css" />
+  <link rel="stylesheet" href="/bower_components/md-date-time-picker/dist/css/themes/light/indigo/mdDateTimePicker.min.css"/>
+  <link rel="stylesheet" href="{{ " /css/main.css " | prepend: site.baseurl }}">
+  <script defer src="https://code.getmdl.io/1.2.0/material.min.js"></script>
+  <script defer src="/bower_components/firebase/firebase.js"></script>  
+  <script defer src="/bower_components/geofire/dist/geofire.min.js"></script>
+  <script defer src="/bower_components/jquery/dist/jquery.min.js"></script>
+  <script defer src="/bower_components/dialog-polyfill/dialog-polyfill.js"></script>
+  <script defer src="/bower_components/moment/min/moment-with-locales.min.js"></script>
+  <script defer src="/bower_components/md-date-time-picker/dist/js/draggabilly.pkgd.min.js"></script>
+  <script defer src="/bower_components/md-date-time-picker/dist/js/mdDateTimePicker.js"></script>
+  <script defer src="/js/default.js"></script>
+  
+  
+</head>

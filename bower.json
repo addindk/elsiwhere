@@ -1,0 +1,24 @@
+{
+  "name": "elsiwhere",
+  "homepage": "https://github.com/runetvilum/elsiwhere",
+  "authors": [
+    "Rune Tvilum <rune@addin.dk>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.0",
+    "dialog-polyfill": "^0.4.4",
+    "firebase": "^3.3.0",
+    "md-date-time-picker": "^2.2.0",
+    "geofire": "^4.1.1"
+  }
+}

@@ -1,0 +1,344 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+# http://blog.jonathanargentiero.com/material-design-lite-color-classes-list/
+---
+@charset "utf-8";
+$list-border-color: rgba(0,0,0,0.1) !default;
+
+$spacing-unit:     30px;
+%vertical-rhythm {
+    margin-bottom: $spacing-unit / 2;
+}
+
+.red {
+    background-color: red;
+    height: 100px;
+}
+.red2 {
+    background-color: green;
+    height: 200px;
+}
+
+.post {
+    &.mdl-card{
+        width:100%;
+    }
+    .mdl-card__title {
+    color: #fff;
+    height: 176px;
+    }
+    .mdl-card__menu {
+    color: #fff;
+    }
+}
+@import
+        "monakai"
+        //"syntax-highlighting"
+;
+.mdl-layout__tab-bar-button {
+    background-color: transparent;
+}
+/*
+.category{
+    a {
+        text-decoration: none;
+    }
+    &.mdl-cell {
+        display: flex;
+    } 
+    .mdl-card {
+        margin: 2px;
+        height: 150px;
+        flex: 1 1 auto;        
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+    }
+    .mdl-card__actions {
+        flex: 0 1 auto;
+        height: 52px;
+        padding: 16px;
+        background: rgba(0, 0, 0, 0.2);        
+    }
+    .name {
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+    }
+}*/
+.category{
+    
+    a {
+        text-decoration: none;
+        display: block;
+        position: relative;
+  margin:2px;
+    }
+    
+    .sq {
+        height: 100%;
+        width: 100%;
+         
+    }
+   
+    .image-title {
+        position:absolute;
+        bottom: 0;
+        width:100%;
+        height: 52px;
+        background: rgba(0, 0, 0, 0.2); 
+        display:flex;   
+        align-items: center;   
+        box-sizing: border-box;
+        
+    }
+    .name {
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 0 16px;
+    }
+}
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+    padding: 16px;
+    .mdl-button{
+        margin-right: 8px;
+    }
+}
+.avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+    }
+.drawer-header {
+    height: 200px;
+    padding: 16px 16px;
+    text-align: center;
+    .avatar {
+
+        margin-bottom: 16px;
+        width: 96px;
+        height: 96px;
+        border-radius: 48px;
+    }
+}
+.drawer-actions {
+    text-align: right;
+    padding: 0;
+}
+.pacifico {
+    font-family: 'Pacifico';
+}
+.logo {
+    font-family: 'Pacifico';
+    font-size: 30px;
+}
+.logo2 {
+    width: 100%;
+    font-family: 'Pacifico';
+    font-size: 24px;
+    text-align: center;
+}
+.fab-top {
+    position: absolute;
+    right: 10px;
+    top: -30px;
+    z-index: 1000;
+}
+.fab-bottom {
+    line-height: 70px;
+    width: 56px;
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    z-index: 100;
+}
+.mdl-textfield {
+        width: 100%;
+    }
+.add-category {
+    .mdl-textfield {
+        width: 100%;
+    }
+    .mdl-card__media{
+        height: 200px;
+        .mdl-button  {
+            position: absolute;
+            right: 16px;
+            bottom: 68px;
+        }
+    }
+    .mdl-progress{
+        width: 100%;
+    }
+}
+.mdl-button--file {
+  input {
+    cursor: pointer;
+    height: 100%;
+    right: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 300px;
+    z-index: 4;
+  }
+}
+
+.mdl-textfield--file {
+  .mdl-textfield__input {
+    box-sizing: border-box;
+    width: calc(100% - 32px);
+  }
+  .mdl-button--file {
+    right: 0;
+  }
+}
+.social-btn-block {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 48px;
+  height: 48px;
+  margin-right: 5px;
+  cursor: pointer;
+  display:inline-block;
+}
+.social-btn {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+  cursor: pointer;
+
+
+}
+.social-btn__twitter {
+  background-image: url('https://www.gstatic.com/images/icons/material/system/2x/post_twitter_white_24dp.png');
+}
+.social-btn__facebook {
+  background-image: url('https://www.gstatic.com/images/icons/material/system/2x/post_facebook_white_24dp.png');
+}
+.social-btn__gplus {
+  background-image: url('https://www.gstatic.com/images/icons/material/system/2x/post_gplus_white_24dp.png');
+}
+.social-btn__instagram {
+  background-image: url('https://www.gstatic.com/images/icons/material/system/2x/post_instagram_white_24dp.png');
+}
+.social-btn__black_twitter {
+  background-image: url('https://www.gstatic.com/images/icons/material/system/2x/post_twitter_black_24dp.png');
+  opacity: 0.5;
+}
+.social-btn__black_facebook {
+  background-image: url('https://www.gstatic.com/images/icons/material/system/2x/post_facebook_black_24dp.png');
+  opacity: 0.5;
+}
+.social-btn__black_gplus {
+  background-image: url('https://www.gstatic.com/images/icons/material/system/2x/post_gplus_black_24dp.png');
+  opacity: 0.5;
+}
+.social-btn__black_instagram {
+  background-image: url('https://www.gstatic.com/images/icons/material/system/2x/post_instagram_black_24dp.png');
+  opacity: 0.5;
+}
+
+.social {
+    a {
+        text-decoration: none;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+}
+.mdl-list--border {
+    border-bottom: 1px solid $list-border-color;
+}
+.mdl-layout__header .mdl-layout__drawer-button {
+    background-color: transparent;
+}
+.mdl-list__item--three-line .mdl-list__item-text-body {
+    max-height: 40px;
+    overflow: hidden;
+}
+.header-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 100;
+    transition: opacity .2s ease-in-out;
+}
+header {
+    position: relative;
+}
+ 
+.is-compact .header-image {
+    opacity: 0;
+    transition: opacity .2s ease-in-out;
+}
+.padding {
+    padding: 16px;
+}
+.list-img {
+    width: 52px;
+    height: 52px;
+    display: block;
+}
+.mdl-list__item{
+    cursor: pointer;
+    text-decoration: none;
+}
+.activity {
+    &.mdl-card{
+        width:100%;
+    }
+}
+.mdl-layout__map{
+    position:absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.minimap {
+    height: 300px;
+    width: 100%;
+}
+.mdl-dialog {
+    width: 500px
+}
+@media (max-width: 800px) {
+    .mdl-dialog {
+        width: inherit
+    }
+}
+.activity-img{
+    width:100%
+}
+.mdl-layout__tab-bar{
+    background-color: transparent;
+}
+
+
+.material-icons {
+    &.highlight {
+        padding: 8px; 
+        background-color: rgba(255,255,255,0.5);
+        border-radius: 50%;      
+    }
+    &.md-18 { 
+        font-size: 18px;        
+    }
+    &.md-24 { 
+        font-size: 24px; 
+    }
+    &.md-36 { 
+        font-size: 36px;
+        height:36px;
+        
+    }
+    &.md-48 { 
+        font-size: 48px; 
+    }
+}

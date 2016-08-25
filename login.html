@@ -1,0 +1,41 @@
+---
+layout: default
+title: Login
+---
+
+<div class="mdl-cell mdl-cell--12-col mdl-card mdl-shadow--2dp">
+    <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">Login</h2>
+    </div>
+
+    <div class="mdl-card__supporting-text mdl-typography--text-center">
+        <form id="login" action="#">
+
+
+            <div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="email" id="email">
+                    <label class="mdl-textfield__label" for="sample3">Email</label>
+                </div>
+            </div>
+            <div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="password" id="password">
+                    <label class="mdl-textfield__label" for="sample3">Password</label>
+                </div>
+            </div>
+            <div>
+                <input type="submit" class="mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect" value="Login">
+            </div>
+            <div>
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Glemt password</a>
+            </div>
+        </form>
+    </div>
+    <div class="mdl-card__actions mdl-card--border">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Login med google</a>
+        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="login-facebook">Login med facebook</button>
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Opret ny bruger</a>
+    </div>
+</div>
+<script defer src="/js/login.js"></script>

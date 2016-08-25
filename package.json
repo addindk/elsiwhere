@@ -1,0 +1,29 @@
+{
+  "name": "elsiwhere",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/runetvilum/elsiwhere.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/runetvilum/elsiwhere/issues"
+  },
+  "homepage": "https://github.com/runetvilum/elsiwhere#readme",
+  "dependencies": {
+    "firebase": "^3.2.1",
+    "firebase-queue": "^1.5.0",
+    "geofire": "^4.1.1",
+    "gm": "^1.23.0",
+    "google-cloud": "^0.38.3",
+    "mkdirp": "^0.5.1",
+    "moment": "^2.14.1",
+    "request": "^2.74.0"
+  }
+}

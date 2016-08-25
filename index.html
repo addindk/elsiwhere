@@ -1,0 +1,179 @@
+---
+title: "Oplevelser i Helsingør Kommune"
+---
+<!-- http://stackoverflow.com/questions/20945944/jekyll-liquid-output-category-list-with-post-count -->
+<!DOCTYPE html>
+<html>
+
+{% include head.html style='blue_grey-orange'%}
+
+<body>
+
+  <div id="drawer" class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer mdl-layout--no-desktop-drawer-button">
+    
+<header class="mdl-layout__header mdl-layout__header--waterfall" style="height:200px;">
+  <div class="header-image"></div>
+  
+  <div class="mdl-layout__header-row">
+    <span class="mdl-layout-title logo" href="/">{{site.title }}</span>
+    <div class="mdl-layout-spacer"></div>
+    <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+      <i class="material-icons">share</i>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
+      <li class="mdl-menu__item">Del på facebook</li>
+      <li class="mdl-menu__item">Twitter</li>
+    </ul>
+  </div>
+</header>
+
+    {% include drawer.html %}
+    
+    <main class="mdl-layout__content">
+      <div class="mdl-grid mdl-grid--no-spacing">
+        <div class="mdl-cell mdl-cell--12-col-tablet mdl-cell--8-col-desktop padding">
+
+              <h1 class="mdl-typography--text-center pacifico">Velkommen til Elsiwhere</h1>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut nibh dolor. Nulla ut convallis nisi, at
+                lacinia risus. Pellentesque nec cursus nisl. Maecenas sed molestie sem. Suspendisse eleifend risus id faucibus
+                dictum. Donec scelerisque orci quis tortor tristique, ut mattis eros porttitor. Aliquam erat volutpat. Curabitur
+                quis velit sit amet sem pretium fringilla vitae et nibh. Morbi imperdiet et magna quis porttitor. Vestibulum
+                mattis dapibus feugiat. Pellentesque feugiat a mi in sollicitudin. Integer ac urna dapibus, cursus risus
+                et, posuere ex. Vestibulum arcu lectus, pellentesque et odio porttitor, congue convallis nulla. In eu egestas
+                lectus, sed consectetur eros. Cras quam ex, hendrerit id ultricies id, pellentesque vel orci.</p>
+              <p>Curabitur viverra, est id fringilla luctus, dui metus pulvinar metus, at suscipit nisl urna a tortor. Aliquam
+                vulputate vel orci ornare hendrerit. In iaculis turpis non sem blandit feugiat. Proin vitae tempor velit.
+                Cras ac laoreet lectus. Curabitur eleifend ac sapien ac vulputate. In suscipit lectus sed dui bibendum, id
+                tincidunt nisi pulvinar.</p>
+              <p>Fusce et faucibus est. Duis eleifend congue tristique. Sed laoreet orci non posuere vulputate. Mauris id tortor
+                non sem ornare tincidunt eget ac nulla. Aliquam lectus nunc, suscipit a semper eget, consectetur in nulla.
+                Sed id ullamcorper lorem. Curabitur ac neque at felis bibendum tincidunt. Mauris maximus, eros non venenatis
+                lacinia, diam lectus sollicitudin purus, at ullamcorper mauris tortor et neque. Mauris vel placerat arcu.
+                Vestibulum eu tortor ac leo rhoncus posuere a id elit. Mauris in dui eget nulla dignissim mollis. Duis dapibus
+                mollis est. Morbi nulla tellus, vulputate nec sapien at, imperdiet porta leo. Mauris in justo purus.</p>
+              <p>Praesent varius vehicula purus, vitae rutrum ipsum rutrum ac. Duis vulputate viverra pretium. Nulla faucibus
+                libero vel libero tempus efficitur. Morbi quis lectus quis libero porta finibus. Curabitur ac erat est. Nulla
+                in auctor dolor. Proin pharetra et magna sit amet rhoncus.</p>
+              
+                <div class="mdl-card mdl-shadow--2dp" style="width:100%">
+                <div class="mdl-card__title  mdl-color--indigo mdl-color-text--white">
+                  <i class="material-icons highlight md-36">search</i>
+                  <h2 class="mdl-card__title-text" style="align-self:center;margin-left:8px">Udforsk</h2>
+                </div>
+                <div class="mdl-card__supporting-text mdl-card--expand">
+                  <p>Elsiwhere bliver hele tiden opdateret med nye oplevelser og aktiviteter.</p>
+                  <p>Brug søgefunktionen til at vælge mellem forskellige kategorier.</p>
+                </div>
+
+                  <div class="mdl-grid mdl-grid--no-spacing" style="width:100%">
+                    {% for post in site.category %}
+            <div class="mdl-cell mdl-cell--2-col-phone mdl-cell--4-col-tablet mdl-cell--4-col-desktop category">
+                <a href="{{post.url}}">
+                <img src="/assets/category/256/{{post.image}}.jpg" class="sq" />
+                <span class="image-title">
+                  <span class="name">{{ post.title | capitalize }}</span>
+                </span>
+                </a>
+            </div>
+            {% endfor %}
+                  </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <a href="/search.html" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    Søg nu
+                  </a>
+                </div>
+              </div>
+          
+        </div>
+       
+        <div class="mdl-cell mdl-cell--12-col-tablet mdl-cell--4-col-desktop">
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-tablet">
+              
+            </div>
+            <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-tablet">
+              <div class="mdl-card mdl-shadow--2dp" style="width:100%;height:100%">
+                <div class="mdl-card__title  mdl-color--teal mdl-color-text--white">
+                  <i class="material-icons highlight md-36">public</i>                 
+                  <h2 class="mdl-card__title-text" style="align-self:center;margin-left:8px">Kort</h2>
+                </div>
+                
+                <div id="map" class="mdl-card__media minimap">
+                                    
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    Vis kort
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-tablet">
+              <div class="mdl-card mdl-shadow--2dp" style="width:100%">
+                <div class="mdl-card__title  mdl-color--pink mdl-color-text--white">
+                  <i class="material-icons highlight md-36">event</i>                 
+                  <h2 class="mdl-card__title-text" style="align-self:center;margin-left:8px">Kalender</h2>
+                </div>
+                <div class="mdl-card__supporting-text mdl-card--expand">
+                  <p>Placeringen af alle oplevelser kan ses på et kort.</p>
+                  <p>Brug kortet til at vise hvor der er oplevelserne tæt på dig.</p>                  
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    Vis alle aktiviteter
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-tablet">
+              <div class="mdl-card mdl-shadow--2dp" style="width:100%">
+                <div class="mdl-card__title  mdl-color--primary mdl-color-text--white">
+                  <i class="material-icons highlight md-36">share</i>                 
+                  <h2 class="mdl-card__title-text" style="align-self:center;margin-left:8px">Del oplevelser</h2>
+                </div>
+                <div class="mdl-card__supporting-text mdl-card--expand">
+                  <p>Du kan oprette nye aktiviteter og oplevelser som du kan dele med dine venner på Facebook, Twitter og Instagram.</p>
+              <p>For at kune dele og oprette nye oplevelse samt aktiviteter skal du være logget ind. Du kan oprette dig som
+                bruger på Elsiwhere eller logge ind med Facebook, Twitter og Instagram.</p>                
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    Login
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--div class="mdl-grid mdl-grid--no-spacing mdl-color--grey-100">
+        <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--8-col">
+              <h4><i class="material-icons">share</i> Del oplevelser</h4>
+              <p>Du kan oprette nye aktiviteter og oplevelser som du kan dele med dine venner på Facebook, Twitter og Instagram.</p>
+              <p>For at kune dele og oprette nye oplevelse samt aktiviteter skal du være logget ind. Du kan oprette dig som
+                bruger på Elsiwhere eller logge ind med Facebook, Twitter og Instagram.</p>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--middle mdl-typography--text-right">
+
+              <button id="login" class="not-auth mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Login</button>
+            </div>
+          </div>
+        </div>
+      </div-->            
+
+      {% include footer.html %}
+    </main>
+  </div>
+  {% include dialog-login.html %}
+  <style>
+    .header-image {
+      background: url('/home.jpg') center / cover;
+    }
+  </style>
+  <script defer src="/js/forside.js"></script>
+  <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNMB2oRUTvJZyUbxCX-hZx6SrzhKAuWCo&callback=initMap"></script>
+</body>
+
+</html>

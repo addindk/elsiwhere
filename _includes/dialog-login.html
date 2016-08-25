@@ -1,0 +1,30 @@
+<dialog id="dialog-login" class="mdl-dialog">
+    <h5 class="mdl-dialog__title">Login</h5>
+    <div class="mdl-dialog__content">
+        <form id="login" action="#">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="email" id="email">
+                <label class="mdl-textfield__label" for="email">Email</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="password" id="password">
+                <label class="mdl-textfield__label" for="password">Password</label>
+            </div>
+            <div class="mdl-typography--text-center">
+                <input type="submit" class="mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect" value="Login">
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Glemt password</a>
+            </div>
+            <div class="mdl-textfield mdl-typography--text-center">
+        
+                <a id="login-facebook" href="#"><span class="social-btn-block social-btn__black_facebook"></span></a>
+                <a id="login-twitter" href="#"><span class="social-btn-block social-btn__black_twitter"></span></a>
+                <a id="login-google" href="#"><span class="social-btn-block social-btn__black_gplus"></span></a>
+              
+            </div>
+            <p id="error"></p>
+        </form>
+    </div>
+    <div class="mdl-dialog__actions">
+        <button type="button" class="mdl-button close">Fortryd</button>
+    </div>
+</dialog>

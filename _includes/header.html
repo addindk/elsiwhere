@@ -1,0 +1,25 @@
+<header class="mdl-layout__header mdl-layout__header--waterfall">
+  <div class="header-image"></div>
+  {% if include.param %}
+  <div class="mdl-layout-icon"><a href="{{ include.param }}.html"><i class="material-icons mdl-color-text--white">arrow_back</i></a></div>
+  {% endif %}
+  <div class="mdl-layout__header-row">
+    <span class="mdl-layout-title logo" href="/">{{site.title }}</span>
+    <div class="mdl-layout-spacer"></div>
+    <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+      <i class="material-icons">more_vert</i>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
+      <li class="mdl-menu__item" id="nav-login">Login</li>
+      <li class="mdl-menu__item" id="nav-logout">Logout</li>
+    </ul>
+  </div>
+  <div class="mdl-layout__header-row">
+    <span class="mdl-layout-title">{{page.title}}</span>
+  </div>
+  <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+      <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Intro</a>
+      <a href="#categories" class="mdl-layout__tab">Kategorier</a>
+      <a href="#fixed-tab-3" class="mdl-layout__tab">Kort</a>
+    </div>
+</header>
