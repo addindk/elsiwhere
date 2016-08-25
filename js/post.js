@@ -7,18 +7,7 @@ $(document).ready(function () {
         });
     });
 });
-$('#facebook').on('click', function () {
-    FB.ui({
-        method: 'share_open_graph',
-        action_type: 'og.likes',
-        action_properties: JSON.stringify({
-            object: url,
-        })
-    }, function (response) {
-        // Debug response (optional)
-        console.log(response);
-    });
-})
+
 var initMap = function () {
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: latitude, lng: longitude },
