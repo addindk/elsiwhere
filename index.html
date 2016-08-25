@@ -5,7 +5,7 @@ title: "Oplevelser i Helsingør Kommune"
 <!DOCTYPE html>
 <html>
 
-{% include head.html style='blue_grey-orange'%}
+{% include head.html style='blue_grey-orange' image='home.jpg'%}
 
 <body>
 
@@ -65,17 +65,9 @@ title: "Oplevelser i Helsingør Kommune"
                   <p>Brug søgefunktionen til at vælge mellem forskellige kategorier.</p>
                 </div>
 
-                  <div class="mdl-grid mdl-grid--no-spacing" style="width:100%">
-                    {% for post in site.category %}
-            <div class="mdl-cell mdl-cell--2-col-phone mdl-cell--4-col-tablet mdl-cell--4-col-desktop category">
-                <a href="{{post.url}}">
-                <img src="/assets/category/256/{{post.image}}.jpg" class="sq" />
-                <span class="image-title">
-                  <span class="name">{{ post.title | capitalize }}</span>
-                </span>
-                </a>
-            </div>
-            {% endfor %}
+
+                  <div id="items" class="mdl-grid mdl-grid--no-spacing" style="width:100%">
+                    
                   </div>
                 <div class="mdl-card__actions mdl-card--border">
                   <a href="/search.html" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
@@ -88,9 +80,7 @@ title: "Oplevelser i Helsingør Kommune"
        
         <div class="mdl-cell mdl-cell--12-col-tablet mdl-cell--4-col-desktop">
           <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-tablet">
-              
-            </div>
+           
             <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-tablet">
               <div class="mdl-card mdl-shadow--2dp" style="width:100%;height:100%">
                 <div class="mdl-card__title  mdl-color--teal mdl-color-text--white">
@@ -145,23 +135,7 @@ title: "Oplevelser i Helsingør Kommune"
             </div>
           </div>
         </div>
-      </div>
-      <!--div class="mdl-grid mdl-grid--no-spacing mdl-color--grey-100">
-        <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
-          <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--8-col">
-              <h4><i class="material-icons">share</i> Del oplevelser</h4>
-              <p>Du kan oprette nye aktiviteter og oplevelser som du kan dele med dine venner på Facebook, Twitter og Instagram.</p>
-              <p>For at kune dele og oprette nye oplevelse samt aktiviteter skal du være logget ind. Du kan oprette dig som
-                bruger på Elsiwhere eller logge ind med Facebook, Twitter og Instagram.</p>
-            </div>
-            <div class="mdl-cell mdl-cell--4-col mdl-cell--middle mdl-typography--text-right">
-
-              <button id="login" class="not-auth mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Login</button>
-            </div>
-          </div>
-        </div>
-      </div-->            
+      </div>      
 
       {% include footer.html %}
     </main>

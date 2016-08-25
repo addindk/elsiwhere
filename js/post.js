@@ -1,12 +1,4 @@
-$(document).ready(function () {
-    $.ajaxSetup({ cache: true });
-    $.getScript('//connect.facebook.net/da_DK/sdk.js', function () {
-        FB.init({
-            appId: '1559938820976000',
-            version: 'v2.7' // or v2.1, v2.2, v2.3, ...
-        });
-    });
-});
+
 
 var initMap = function () {
     map = new google.maps.Map(document.getElementById('map'), {

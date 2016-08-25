@@ -1,3 +1,12 @@
+$(document).ready(function () {
+    $.ajaxSetup({ cache: true });
+    $.getScript('//connect.facebook.net/da_DK/sdk.js', function () {
+        FB.init({
+            appId: '1559938820976000',
+            version: 'v2.7' // or v2.1, v2.2, v2.3, ...
+        });
+    });
+});
 // Initialize Firebase
 // TODO: Replace with your project's customized code snippet    
 moment.locale('da-DK');
@@ -102,7 +111,7 @@ $('#share-fb').on('click', function () {
         method: 'share_open_graph',
         action_type: 'og.likes',
         action_properties: JSON.stringify({
-            object: url,
+            object: window.location.href
         })
     }, function (response) {
         // Debug response (optional)
