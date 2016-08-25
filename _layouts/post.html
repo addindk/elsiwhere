@@ -115,7 +115,7 @@
     var id = "{{page.image}}"
     var latitude = {{page.latitude}};
     var longitude = {{page.longitude}};
-    var url = '{{page.url | prepend: site.baseurl}}';
+    var url = '{{page.url | prepend: site.url}}';
 </script>
   <script defer src="/js/post.js"></script>
   <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNMB2oRUTvJZyUbxCX-hZx6SrzhKAuWCo&callback=initMap"></script>
