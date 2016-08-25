@@ -7,7 +7,7 @@ $(document).ready(function () {
         });
     });
 });
-$('#facebook').on('click touchstart', function () {
+$('#facebook').on('click', function () {
     FB.ui({
         method: 'share_open_graph',
         action_type: 'og.likes',

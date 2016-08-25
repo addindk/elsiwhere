@@ -76,7 +76,7 @@ dialogLogin.querySelector('.close').addEventListener('click', function () {
     dialogLogin.close();
 });
 var provider = new firebase.auth.FacebookAuthProvider();
-$("#login-facebook").on('click touchstart', function () {
+$("#login-facebook").on('click', function () {
     firebase.auth().signInWithPopup(provider).then(function (result) {
         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
         console.log(result);
