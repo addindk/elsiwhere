@@ -1,6 +1,7 @@
 var fs = require('fs');
 var Queue = require('firebase-queue');
 var Twitter = require('twitter');
+var FB = require('fb');
 var moment = require('moment');
 var mkdirp = require('mkdirp');
 var exec = require('child_process').exec;
@@ -8,6 +9,7 @@ var gm = require('gm').subClass({ nativeAutoOrient: true });;
 var request = require('request');
 var firebase = require('firebase');
 var config_twitter = require('./twitter.json');
+var config_twitter = require('./facebook.json');
 var GeoFire = require('geofire');
 var config = {
     databaseURL: "https://project-1805673855421320284.firebaseio.com",
@@ -29,10 +31,37 @@ var mkdir = function (p) {
         });
     });
 };
+var getAccessToken = function () {
+    return new Promise(function (resolve, reject) {
+        FB.api('oauth/access_token', config_facebook, function (res) {
+            if (!res || res.error) {
+                reject(res);
+            } else {
+                resolve(res.access_token);
+            }
+        });
+    });
+};
+var fb_post = function (url) {
+    return getAccessToken().then(function (token) {
+        return new Promise(function (resolve, reject) {
+            FB.setAccessToken(token);
+            FB.api('Elsiwhere/feed', 'post', { message: 'http://elsiwhere.addin.dk/' + url }, function (res) {
+                if (!res || res.error) {
+                    reject(res);
+                }
+                else {
+                    resolve();
+                }
+            });
+        });
+    });
+};
+
 var tweet = function (url) {
     return new Promise(function (resolve, reject) {
         client.post('statuses/update', { status: 'http://elsiwhere.addin.dk/' + url }, function (err, tweet, response) {
-            console.log(err,tweet,response)
+            console.log(err, tweet, response)
             if (err) {
                 reject(err);
             }
@@ -186,6 +215,8 @@ var categoryAdd = function (data) {
         return firebase.database().ref('category').child(data._id).set({ t: data.title, d: data.description, ts: date.valueOf() });
     }).then(function () {
         return tweet('a' + data._id);
+    }).then(function () {
+        return fb_post('a' + data._id);
     });
 };
 var subcategoryAdd = function (data) {
@@ -205,6 +236,8 @@ var subcategoryAdd = function (data) {
         return firebase.database().ref(data.item).child(data.category).child(data._id).set({ t: data.title, d: data.description, ts: date.valueOf() });
     }).then(function () {
         return tweet('b' + data._id);
+    }).then(function () {
+        return fb_post('b' + data._id);
     });
 };
 var postAdd = function (data) {
@@ -247,6 +280,8 @@ var postAdd = function (data) {
         return geofire.set(data._id, [data.lat, data.lng]);
     }).then(function () {
         return tweet('c' + data._id);
+    }).then(function () {
+        return fb_post('c' + data._id);
     });/*.then(function () {
         return new Promise(function (resolve, reject) {
             request({
