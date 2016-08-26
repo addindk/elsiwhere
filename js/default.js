@@ -115,13 +115,9 @@ var login = function (provider) {
         var errorCode = error.code;
         pendingCred = error.credential;
         if (error.code === 'auth/account-exists-with-different-credential') {
-
             firebase.auth().fetchProvidersForEmail(error.email).then(function (providers) {
-                console.log(providers);
-                if (providers[0] === 'google.com') {
-                    $('#error').show();
-                    $('#error').text('Du har tidligere logget ind med ' + providerName[providers[0]] + '. Hvis du fremover også vil bruge ' + providerName[provider.providerId] + ', så skal du først logge ind med ' + providerName[providers[0]] + ' for at tillade dette.');
-                }
+                $('#error').show();
+                $('#error').text('Du har tidligere logget ind med ' + providerName[providers[0]] + '. Hvis du fremover også vil bruge ' + providerName[provider.providerId] + ', så skal du først logge ind med ' + providerName[providers[0]] + ' for at tillade dette.');
             });
         }
         var errorMessage = error.message;
