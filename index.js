@@ -1,12 +1,13 @@
 var fs = require('fs');
 var Queue = require('firebase-queue');
+var Twitter = require('twitter');
 var moment = require('moment');
 var mkdirp = require('mkdirp');
 var exec = require('child_process').exec;
 var gm = require('gm').subClass({ nativeAutoOrient: true });;
 var request = require('request');
 var firebase = require('firebase');
-
+var config_twitter = require('./twitter.json');
 var GeoFire = require('geofire');
 var config = {
     databaseURL: "https://project-1805673855421320284.firebaseio.com",
@@ -15,9 +16,23 @@ var config = {
         uid: "queue"
     }
 };
+var client = new Twitter(config_twitter);
 var mkdir = function (p) {
     return new Promise(function (resolve, reject) {
         mkdirp(p, function (err) {
+            if (err) {
+                reject(err);
+            }
+            else {
+                resolve();
+            }
+        });
+    });
+};
+var tweet = function (url) {
+    return new Promise(function (resolve, reject) {
+        client.post('statuses/update', { status: 'http://elsiwhere.addin.dk/' + url }, function (err, tweet, response) {
+            console.log(err,tweet,response)
             if (err) {
                 reject(err);
             }
@@ -169,6 +184,8 @@ var categoryAdd = function (data) {
         return buildJekyll();
     }).then(function () {
         return firebase.database().ref('category').child(data._id).set({ t: data.title, d: data.description, ts: date.valueOf() });
+    }).then(function () {
+        return tweet('a' + data._id);
     });
 };
 var subcategoryAdd = function (data) {
@@ -186,6 +203,8 @@ var subcategoryAdd = function (data) {
         return buildJekyll();
     }).then(function () {
         return firebase.database().ref(data.item).child(data.category).child(data._id).set({ t: data.title, d: data.description, ts: date.valueOf() });
+    }).then(function () {
+        return tweet('b' + data._id);
     });
 };
 var postAdd = function (data) {
@@ -226,6 +245,8 @@ var postAdd = function (data) {
         return firebase.database().ref(data.item).child(data._id).set(doc);
     }).then(function () {
         return geofire.set(data._id, [data.lat, data.lng]);
+    }).then(function () {
+        return tweet('c' + data._id);
     });/*.then(function () {
         return new Promise(function (resolve, reject) {
             request({

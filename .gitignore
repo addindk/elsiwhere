@@ -35,7 +35,9 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+.jekyll-metadata
 elsiwhere-31c60e1177d9.json
+twitter.json
 _site
 bower_components
 .sass-cache
