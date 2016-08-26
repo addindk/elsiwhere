@@ -20,6 +20,13 @@
   <meta property="place:location:latitude" content="{{page.latitude}}">
   <meta property="place:location:longitude" content="{{page.longitude}}">
   {% endif %}
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@elsiwhere">
+  
+
+
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ " /feed.xml
     " | prepend: site.baseurl | prepend: site.url }}">
@@ -38,6 +45,7 @@
   <script defer src="/bower_components/moment/min/moment-with-locales.min.js"></script>
   <script defer src="/bower_components/md-date-time-picker/dist/js/draggabilly.pkgd.min.js"></script>
   <script defer src="/bower_components/md-date-time-picker/dist/js/mdDateTimePicker.js"></script>
+  <script defer src="https://platform.twitter.com/widgets.js"></script>
   <script defer src="/js/default.js"></script>
   
   

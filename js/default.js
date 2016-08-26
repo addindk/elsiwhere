@@ -7,6 +7,7 @@ $(document).ready(function () {
         });
     });
 });
+
 // Initialize Firebase
 // TODO: Replace with your project's customized code snippet    
 moment.locale('da-DK');
@@ -149,4 +150,4 @@ $('#share-fb').on('click', function () {
         // Debug response (optional)
         console.log(response);
     });
-})
+});
