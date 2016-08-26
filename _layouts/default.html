@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html>
 
-{% include head.html %}
+{% include head.html style='teal-orange' image='forside.jpg' %}
 
-<body class="mdl-color--grey-700">
+<body>
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    {% include header.html %}
+    <header class="mdl-layout__header">  
+  <div class="mdl-layout__header-row">
+    <span class="mdl-layout-title logo" href="/">{{site.title }}</span>    
+  </div>
+</header>
+             
+     {% include drawer.html %}
 
     <main class="mdl-layout__content">
-      <div class="mdl-grid mdl-grid--no-spacing">
+      <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--12-col  mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
           {{content}}
         </div>
@@ -17,6 +23,7 @@
     </main>
     {% include footer.html %}
   </div>
+    {% include dialog-login.html %}
 </body>
 
 </html>

@@ -21,12 +21,13 @@ $('.admin').hide();
 firebase.initializeApp(config);
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
+        console.log(user.providerData);
         $("#displayName").text(user.displayName);
         $("#photoURL").attr('src', user.photoURL).show();
         $("#nav-logout").show();
         $("#nav-login").hide();
 
-        if(currentPost && currentPost.uid === user.uid){
+        if (currentPost && currentPost.uid === user.uid) {
             $('.post-edit').show();
         } else {
             $('.post-edit').hide();
@@ -43,9 +44,13 @@ firebase.auth().onAuthStateChanged(function (user) {
             }
         });
         firebase.database().ref('users').child(user.uid).set({
-            n: firebaseUser.displayName,
-            u: firebaseUser.photoURL,
-            e: firebaseUser.email
+            n: user.displayName,
+            u: user.photoURL/*,
+            e: firebaseUser.email*/
+        }).then(function (res) {
+            console.log(res);
+        }).catch(function (err) {
+            console.log(err);
         });
     } else {
         $("#displayName").text("Ikke logget ind");
@@ -77,35 +82,66 @@ if (!dialogLogin.showModal) {
     dialogPolyfill.registerDialog(dialogLogin);
 }
 
-$("#nav-login").on('click touchstart', function () {
+$("#nav-login").on('click', function () {
     //$('.mdl-layout')[0].MaterialLayout.toggleDrawer();
     dialogLogin.showModal();
+    pendingCred = null;
 });
 dialogLogin.querySelector('.close').addEventListener('click', function () {
     dialogLogin.close();
 });
-var provider = new firebase.auth.FacebookAuthProvider();
-$("#login-facebook").on('click', function () {
+var providerName = {
+    "password": "brugernavn og password",
+    "facebook.com": "Facebook",
+    "google.com": "Google+",
+    "twitter.com": "Twitter"
+}
+var pendingCred;
+var login = function (provider) {
+    $('#error').hide();
     firebase.auth().signInWithPopup(provider).then(function (result) {
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        console.log(result);
-        var token = result.credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
+        if (pendingCred) {
+            result.user.link(pendingCred).then(function () {
+                pendingCred = null;
+                // Twitter account successfully linked to the existing Firebase user.
+                //goToApp();
+            });
+        }
         dialogLogin.close();
-        // ...
+
     }).catch(function (error) {
         console.log(error);
         // Handle Errors here.
         var errorCode = error.code;
+        pendingCred = error.credential;
+        if (error.code === 'auth/account-exists-with-different-credential') {
+
+            firebase.auth().fetchProvidersForEmail(error.email).then(function (providers) {
+                console.log(providers);
+                if (providers[0] === 'google.com') {
+                    $('#error').show();
+                    $('#error').text('Du har tidligere logget ind med ' + providerName[providers[0]] + '. Hvis du fremover også vil bruge ' + providerName[provider.providerId] + ', så skal du først logge ind med ' + providerName[providers[0]] + ' for at tillade dette.');
+                }
+            });
+        }
         var errorMessage = error.message;
         // The email of the user's account used.
         var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
     });
+}
+$("#login-facebook").on('click', function () {
+    var provider = new firebase.auth.FacebookAuthProvider();
+    login(provider);
 });
+$("#login-twitter").on('click', function () {
+    var provider = new firebase.auth.TwitterAuthProvider();
+    login(provider);
+});
+$("#login-google").on('click', function () {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    login(provider);
+});
+
 $('#share-fb').on('click', function () {
     FB.ui({
         method: 'share_open_graph',
