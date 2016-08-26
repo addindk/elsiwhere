@@ -1,7 +1,7 @@
 var fs = require('fs');
 var Queue = require('firebase-queue');
 var Twitter = require('twitter');
-var FB = require('fb');
+//var FB = require('fb');
 var moment = require('moment');
 var mkdirp = require('mkdirp');
 var exec = require('child_process').exec;
@@ -9,7 +9,7 @@ var gm = require('gm').subClass({ nativeAutoOrient: true });;
 var request = require('request');
 var firebase = require('firebase');
 var config_twitter = require('./twitter.json');
-var config_twitter = require('./facebook.json');
+//var config_twitter = require('./facebook.json');
 var GeoFire = require('geofire');
 var config = {
     databaseURL: "https://project-1805673855421320284.firebaseio.com",
@@ -215,9 +215,9 @@ var categoryAdd = function (data) {
         return firebase.database().ref('category').child(data._id).set({ t: data.title, d: data.description, ts: date.valueOf() });
     }).then(function () {
         return tweet('a' + data._id);
-    }).then(function () {
+    });/*.then(function () {
         return fb_post('a' + data._id);
-    });
+    });*/
 };
 var subcategoryAdd = function (data) {
     var date = moment();
@@ -236,9 +236,9 @@ var subcategoryAdd = function (data) {
         return firebase.database().ref(data.item).child(data.category).child(data._id).set({ t: data.title, d: data.description, ts: date.valueOf() });
     }).then(function () {
         return tweet('b' + data._id);
-    }).then(function () {
+    });/*.then(function () {
         return fb_post('b' + data._id);
-    });
+    });*/
 };
 var postAdd = function (data) {
     var date = moment();
@@ -280,9 +280,9 @@ var postAdd = function (data) {
         return geofire.set(data._id, [data.lat, data.lng]);
     }).then(function () {
         return tweet('c' + data._id);
-    }).then(function () {
-        return fb_post('c' + data._id);
     });/*.then(function () {
+        return fb_post('c' + data._id);
+    });*//*.then(function () {
         return new Promise(function (resolve, reject) {
             request({
                 method: 'PUT',
