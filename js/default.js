@@ -21,10 +21,10 @@ var currentPost;
 $('.admin').hide();
 firebase.initializeApp(config);
 firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-        console.log(user.providerData);
-        $("#displayName").text(user.displayName);
-        $("#photoURL").attr('src', user.photoURL).show();
+    $("#photoURL").hide();
+    console.log(user);
+    if (user && user.emailVerified) {
+
         $("#nav-logout").show();
         $("#nav-login").hide();
 
@@ -44,10 +44,17 @@ firebase.auth().onAuthStateChanged(function (user) {
                 $('.not-auth').hide();
             }
         });
+        if (!user.displayName) {
+            dialogDisplayName.showModal();
+
+        }
+        if (user.photoURL) {
+            $("#photoURL").attr('src', user.photoURL).show();
+        }
+        $("#displayName").text(user.displayName || "");
         firebase.database().ref('users').child(user.uid).set({
-            n: user.displayName,
-            u: user.photoURL/*,
-            e: firebaseUser.email*/
+            n: user.displayName || "",
+            u: user.photoURL || ""
         }).then(function (res) {
             console.log(res);
         }).catch(function (err) {
@@ -55,7 +62,6 @@ firebase.auth().onAuthStateChanged(function (user) {
         });
     } else {
         $("#displayName").text("Ikke logget ind");
-        $("#photoURL").hide();
         $("#nav-logout").hide();
         $("#nav-login").show();
         // No user is signed in.
@@ -63,6 +69,11 @@ firebase.auth().onAuthStateChanged(function (user) {
         $('.auth').hide();
         $('.not-auth').show();
         $('.post-edit').hide();
+        if (!user.emailVerified) {
+            user.sendEmailVerification();
+            dialogEmailVerification.showModal();
+        }
+
     }
 });
 $("#nav-logout").on("click touchstart", function () {
@@ -79,8 +90,12 @@ $("#nav-logout").on("click touchstart", function () {
  */
 
 var dialogLogin = $("#dialog-login")[0];
+var dialogEmailVerification = $("#dialog-email-varification")[0];
+var dialogDisplayName = $("#dialog-displayName")[0];
 if (!dialogLogin.showModal) {
     dialogPolyfill.registerDialog(dialogLogin);
+    dialogPolyfill.registerDialog(dialogEmailVerification);
+    dialogPolyfill.registerDialog(dialogDisplayName);
 }
 
 $("#nav-login").on('click', function () {
@@ -90,6 +105,13 @@ $("#nav-login").on('click', function () {
 });
 dialogLogin.querySelector('.close').addEventListener('click', function () {
     dialogLogin.close();
+});
+dialogEmailVerification.querySelector('.close').addEventListener('click', function () {
+    dialogEmailVerification.close();
+    firebase.auth().signOut();
+});
+dialogDisplayName.querySelector('.close').addEventListener('click', function () {
+    dialogDisplayName.close();
 });
 var providerName = {
     "password": "brugernavn og password",
@@ -101,6 +123,20 @@ var pendingCred;
 var login = function (provider) {
     $('#error').hide();
     firebase.auth().signInWithPopup(provider).then(function (result) {
+        console.log(provider, result);
+        for (var i = 0; i < result.user.providerData.length; i++) {
+            if (result.user.providerData[i].providerId === provider.providerId) {
+                result.user.updateProfile({
+                    displayName: result.user.providerData[i].displayName || "",
+                    photoURL: result.user.providerData[i].photoURL || ""
+                });
+                console.log({
+                    displayName: result.user.providerData[i].displayName || "",
+                    photoURL: result.user.providerData[i].photoURL || ""
+                });
+                break;
+            }
+        }
         if (pendingCred) {
             result.user.link(pendingCred).then(function () {
                 pendingCred = null;
@@ -138,7 +174,56 @@ $("#login-google").on('click', function () {
     var provider = new firebase.auth.GoogleAuthProvider();
     login(provider);
 });
+$("#login-password").submit(function (event) {
+    event.preventDefault();
+    var email = $("#email").val();
+    var password = $("#password").val();
+    firebase.auth().signInWithEmailAndPassword(email, password).then(function (result) {
+        console.log(result);
 
+        if (pendingCred) {
+            result.user.link(pendingCred).then(function () {
+                pendingCred = null;
+                // Twitter account successfully linked to the existing Firebase user.
+                //goToApp();
+            });
+        }
+        dialogLogin.close();
+
+    }).catch(function (error) {
+        console.log(error);
+        // Handle Errors here.
+        var errorCode = error.code;
+        pendingCred = error.credential;
+        if (error.code === 'auth/wrong-password') {
+            $('#error').show();
+            $('#error').text('Forkert password eller brugeren findes ikke');
+        } else if (error.code === 'auth/account-exists-with-different-credential') {
+            firebase.auth().fetchProvidersForEmail(error.email).then(function (providers) {
+                $('#error').show();
+                $('#error').text('Du har tidligere logget ind med ' + providerName[providers[0]] + '. Hvis du fremover også vil logge ind med brugernavn og password, så skal du først logge ind med ' + providerName[providers[0]] + ' for at tillade dette.');
+            });
+        }
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+    });
+});
+$('#create-user').on('click', function () {
+    var email = $("#email").val();
+    var password = $("#password").val();
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(function () {
+        dialogLogin.close();
+    }).catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log("error", error)
+        $('#error').show();
+        $('#error').text(error.message);
+
+    });
+});
 $('#share-fb').on('click', function () {
     FB.ui({
         method: 'share_open_graph',
@@ -149,5 +234,34 @@ $('#share-fb').on('click', function () {
     }, function (response) {
         // Debug response (optional)
         console.log(response);
+    });
+});
+$('#forgot-password').on('click', function () {
+    var email = $("#email").val();
+    firebase.auth().sendPasswordResetEmail(email).then(function () {
+        $('#error').show();
+        $('#error').text("Email er sendt med link til at ændre password");
+    }).catch(function (error) {
+        $('#error').show();
+        $('#error').text(error.message);
+    });
+});
+$("#login-displayName").submit(function (event) {
+    event.preventDefault();
+    var displayName = $("#display-name").val();
+    firebase.auth().currentUser.updateProfile({
+        displayName: displayName,
+        photoURL: firebase.auth().currentUser.photoURL || ""
+    }).then(function () {
+        dialogDisplayName.close();
+        $("#displayName").text(displayName);
+    }).catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log("error", error)
+        $('#error-displayName').show();
+        $('#error-displayName').text(error.message);
+
     });
 });

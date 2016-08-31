@@ -42,3 +42,4 @@ twitter.json
 _site
 bower_components
 .sass-cache
+.DS_Store

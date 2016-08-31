@@ -1,7 +1,7 @@
 <dialog id="dialog-login" class="mdl-dialog">
     <h5 class="mdl-dialog__title">Login</h5>
     <div class="mdl-dialog__content">
-        <form id="login" action="#">
+        <form id="login-password" action="#">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <input class="mdl-textfield__input" type="email" id="email">
                 <label class="mdl-textfield__label" for="email">Email</label>
@@ -12,14 +12,16 @@
             </div>
             <div class="mdl-typography--text-center">
                 <input type="submit" class="mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect" value="Login">
-                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Glemt password</a>
+                <a id="create-user" href="#" class="mdl-button mdl-button--raised mdl-button--accent mdl-js-button mdl-js-ripple-effect">Opret bruger</a>
+                <a id="forgot-password" href="#" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Glemt password</a>
+
             </div>
             <div class="mdl-textfield mdl-typography--text-center">
-        
+
                 <a id="login-facebook" href="#"><span class="social-btn-block social-btn__black_facebook"></span></a>
                 <a id="login-twitter" href="#"><span class="social-btn-block social-btn__black_twitter"></span></a>
                 <a id="login-google" href="#"><span class="social-btn-block social-btn__black_gplus"></span></a>
-              
+
             </div>
             <div id="error" class="mdl-color--red-300"></div>
         </form>
@@ -28,3 +30,33 @@
         <button type="button" class="mdl-button close">Fortryd</button>
     </div>
 </dialog>
+<dialog id="dialog-email-varification" class="mdl-dialog">
+    <h5 class="mdl-dialog__title">Email verification</h5>
+    <div class="mdl-dialog__content">
+        <p>Du skal bekræfte din email før du kan logge ind.</p>
+        <p>Der er sendt en email til dig, med et link til bekræfelse af email adresse</p>
+    </div>
+    <div class="mdl-dialog__actions">
+        <button type="button" class="mdl-button close">OK</button>
+    </div>
+</dialog>
+<dialog id="dialog-displayName" class="mdl-dialog">
+    <h5 class="mdl-dialog__title">Opdater kaldenavn</h5>
+    <div class="mdl-dialog__content">
+        <p>Du skal opdatere dit kaldenavn som vises til andre brugere på Elsiwhere</p> 
+        <form id="login-displayName" action="#">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="display-name" required>
+                <label class="mdl-textfield__label" for="display-name">Kaldenavn</label>
+            </div>
+            <div class="mdl-typography--text-center">
+                <input type="submit" class="mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect" value="Opdater">
+            </div>
+            <div id="error-displayName" class="mdl-color--red-300"></div>
+        </form>
+    </div>
+    <div class="mdl-dialog__actions">
+        <button type="button" class="mdl-button close">Fortryd</button>
+    </div>
+</dialog>
+
